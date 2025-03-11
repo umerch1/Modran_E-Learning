@@ -1,28 +1,31 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Icons } from "@/components/icons"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Icons } from "@/components/icons";
 
 export function StudentLoginForm() {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
-
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
   async function onSubmit(event: React.FormEvent) {
-    event.preventDefault()
-    setIsLoading(true)
-
+    event.preventDefault();
+    setIsLoading(true);
+    console.log("Student Login sucessfully");
     // Simulate API call to Strapi
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       // Redirect to student dashboard on successful login
-      router.push("/student/dashboard")
-    }, 1000)
+      router.push("/student/dashboard");
+    }, 1000);
   }
 
   return (
@@ -30,7 +33,18 @@ export function StudentLoginForm() {
       <form onSubmit={onSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="student-email">Email</Label>
-          <Input id="student-email" type="email" placeholder="student@example.com" required />
+          <Input
+            id="student-email"
+            type="email"
+            placeholder="student@example.com"
+            required
+            defaultValue={user.email}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, email: event.target.value };
+              })
+            }
+          />
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
@@ -39,7 +53,17 @@ export function StudentLoginForm() {
               <a href="/forgot-password">Forgot password?</a>
             </Button>
           </div>
-          <Input id="student-password" type="password" required />
+          <Input
+            id="student-password"
+            type="password"
+            required
+            defaultValue={user.password}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, password: event.target.value };
+              })
+            }
+          />
         </div>
         <Button type="submit" className="w-full" disabled={isLoading}>
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
@@ -47,6 +71,5 @@ export function StudentLoginForm() {
         </Button>
       </form>
     </div>
-  )
+  );
 }
-

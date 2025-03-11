@@ -1,11 +1,19 @@
-import type { ReactNode } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { LayoutDashboard, Users, BookOpen, FileText, Settings, Bell, LogOut } from "lucide-react"
+import type { ReactNode } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  LayoutDashboard,
+  Users,
+  BookOpen,
+  FileText,
+  Settings,
+  Bell,
+  LogOut,
+} from "lucide-react";
 
 interface AdminDashboardLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
@@ -14,7 +22,13 @@ export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">EduLearn Admin</span>
+            <img
+              src="/images/icon.png"
+              width={200}
+              height={100}
+              alt="EduLearn"
+            />
+            <span className="text-3xl font-bold self-end">Admin</span>
           </Link>
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon">
@@ -22,7 +36,10 @@ export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
             </Button>
             <Link href="/admin/profile">
               <Avatar>
-                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Admin" />
+                <AvatarImage
+                  src="/placeholder.svg?height=32&width=32"
+                  alt="Admin"
+                />
                 <AvatarFallback>AD</AvatarFallback>
               </Avatar>
             </Link>
@@ -78,6 +95,5 @@ export function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
         </main>
       </div>
     </div>
-  )
+  );
 }
-

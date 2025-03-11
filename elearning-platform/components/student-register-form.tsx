@@ -1,28 +1,35 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Icons } from "@/components/icons"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Icons } from "@/components/icons";
 
 export function StudentRegisterForm() {
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   async function onSubmit(event: React.FormEvent) {
-    event.preventDefault()
-    setIsLoading(true)
-
+    event.preventDefault();
+    setIsLoading(true);
+    console.log("Student Registeration");
     // Simulate API call to Strapi
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       // Redirect to student dashboard on successful registration
-      router.push("/student/dashboard")
-    }, 1000)
+      router.push("/student/dashboard");
+    }, 1000);
   }
 
   return (
@@ -31,24 +38,77 @@ export function StudentRegisterForm() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="first-name">First name</Label>
-            <Input id="first-name" required />
+            <Input
+              id="first-name"
+              required
+              placeholder="First Name"
+              defaultValue={user.firstName}
+              onChange={(event) =>
+                setUser((prev) => {
+                  return { ...prev, firstName: event.target.value };
+                })
+              }
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="last-name">Last name</Label>
-            <Input id="last-name" required />
+            <Input
+              id="last-name"
+              required
+              placeholder="Last Name"
+              defaultValue={user.lastName}
+              onChange={(event) =>
+                setUser((prev) => {
+                  return { ...prev, lastName: event.target.value };
+                })
+              }
+            />
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="student@example.com" required />
+          <Input
+            id="email"
+            type="email"
+            placeholder="student@example.com"
+            required
+            defaultValue={user.email}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, email: event.target.value };
+              })
+            }
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
+          <Input
+            id="password"
+            type="password"
+            required
+            placeholder="Password"
+            defaultValue={user.password}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, password: event.target.value };
+              })
+            }
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirm-password">Confirm Password</Label>
-          <Input id="confirm-password" type="password" required />
+          <Input
+            id="confirm-password"
+            type="password"
+            required
+            placeholder="confirm Password"
+            defaultValue={user.confirmPassword}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, confirmPassword: event.target.value };
+              })
+            }
+          />
         </div>
         <Button type="submit" className="w-full" disabled={isLoading}>
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
@@ -56,6 +116,5 @@ export function StudentRegisterForm() {
         </Button>
       </form>
     </div>
-  )
+  );
 }
-
