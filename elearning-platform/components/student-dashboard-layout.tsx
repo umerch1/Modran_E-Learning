@@ -1,20 +1,48 @@
-import type { ReactNode } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { LayoutDashboard, BookOpen, Calendar, MessageSquare, Settings, LogOut } from "lucide-react"
+"use client";
+
+import type { ReactNode } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+// @ts-ignore
+import Cookies from "js-cookie";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Calendar,
+  MessageSquare,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 interface StudentDashboardLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export function StudentDashboardLayout({ children }: StudentDashboardLayoutProps) {
+export function StudentDashboardLayout({
+  children,
+}: StudentDashboardLayoutProps) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Remove the auth token from cookies
+    Cookies.remove("authToken");
+    // Redirect to the login page
+    router.push("/login");
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">EduLearn</span>
+        <div className="container flex h-20 items-center justify-between">
+          <Link href="/" className="flex  items-center space-x-2">
+            <img
+              src="/images/icon.png"
+              width={200}
+              height={100}
+              alt="EduLearn"
+            />
           </Link>
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon">
@@ -25,7 +53,10 @@ export function StudentDashboardLayout({ children }: StudentDashboardLayoutProps
             </Button>
             <Link href="/student/profile">
               <Avatar>
-                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Student" />
+                <AvatarImage
+                  src="/placeholder.svg?height=32&width=32"
+                  alt="Student"
+                />
                 <AvatarFallback>ST</AvatarFallback>
               </Avatar>
             </Link>
@@ -65,15 +96,14 @@ export function StudentDashboardLayout({ children }: StudentDashboardLayoutProps
                 Settings
               </Button>
             </Link>
-            <Link href="/login">
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
-              >
-                <LogOut className="mr-2 h-5 w-5" />
-                Logout
-              </Button>
-            </Link>
+            <Button
+              onClick={handleLogout}
+              variant="ghost"
+              className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+            >
+              <LogOut className="mr-2 h-5 w-5" />
+              Logout
+            </Button>
           </div>
         </aside>
         <main className="flex-1 p-6">
@@ -81,6 +111,5 @@ export function StudentDashboardLayout({ children }: StudentDashboardLayoutProps
         </main>
       </div>
     </div>
-  )
+  );
 }
-

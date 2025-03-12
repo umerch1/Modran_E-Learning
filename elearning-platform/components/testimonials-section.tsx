@@ -4,21 +4,31 @@ export function TestimonialsSection() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">What Our Students Say</h2>
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+              What Our Students Say
+            </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Hear from our community of learners about their experiences with our platform.
+              Hear from our community of learners about their experiences with
+              our platform.
             </p>
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="flex flex-col justify-between space-y-4 rounded-lg border p-6">
+            <div
+              key={index}
+              className="flex flex-col justify-between space-y-4 rounded-lg border p-6"
+            >
               <div className="space-y-2">
                 <div className="flex space-x-0.5">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className={`h-5 w-5 ${i < testimonial.rating ? "text-yellow-400" : "text-gray-300"}`}
+                      className={`h-5 w-5 ${
+                        i < testimonial.rating
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +47,9 @@ export function TestimonialsSection() {
                 />
                 <div>
                   <p className="font-medium">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.course}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.course}
+                  </p>
                 </div>
               </div>
             </div>
@@ -45,30 +57,29 @@ export function TestimonialsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Ahsan Ali mansoor",
     avatar: "/placeholder.svg?height=40&width=40",
     course: "Web Development Bootcamp",
     rating: 5,
     text: "This platform completely transformed my career. The courses are well-structured and the instructors are incredibly knowledgeable.",
   },
   {
-    name: "Michael Chen",
+    name: "Hassan Junaid",
     avatar: "/placeholder.svg?height=40&width=40",
     course: "Data Science Fundamentals",
     rating: 5,
     text: "I've tried many online learning platforms, but this one stands out. The community support is amazing and the content is top-notch.",
   },
   {
-    name: "Emily Rodriguez",
+    name: "Noor Fatima",
     avatar: "/placeholder.svg?height=40&width=40",
     course: "UX/UI Design Essentials",
     rating: 4,
     text: "The flexibility of learning at my own pace while still having access to expert guidance has been invaluable for my professional growth.",
   },
-]
-
+];
