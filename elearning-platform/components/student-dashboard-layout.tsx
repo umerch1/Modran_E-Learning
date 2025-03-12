@@ -1,5 +1,10 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+// @ts-ignore
+import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -18,6 +23,15 @@ interface StudentDashboardLayoutProps {
 export function StudentDashboardLayout({
   children,
 }: StudentDashboardLayoutProps) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Remove the auth token from cookies
+    Cookies.remove("authToken");
+    // Redirect to the login page
+    router.push("/login");
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -82,15 +96,14 @@ export function StudentDashboardLayout({
                 Settings
               </Button>
             </Link>
-            <Link href="/login">
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
-              >
-                <LogOut className="mr-2 h-5 w-5" />
-                Logout
-              </Button>
-            </Link>
+            <Button
+              onClick={handleLogout}
+              variant="ghost"
+              className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+            >
+              <LogOut className="mr-2 h-5 w-5" />
+              Logout
+            </Button>
           </div>
         </aside>
         <main className="flex-1 p-6">

@@ -1,21 +1,20 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
+import axios from "axios";
 
 export function StudentRegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   const [user, setUser] = useState({
     email: "",
-    firstName: "",
-    lastName: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
@@ -23,48 +22,62 @@ export function StudentRegisterForm() {
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault();
     setIsLoading(true);
-    console.log("Student Registeration");
-    // Simulate API call to Strapi
-    setTimeout(() => {
+
+    const { username, email, password, confirmPassword } = user;
+
+    // Check if password and confirmPassword match
+    if (password !== confirmPassword) {
       setIsLoading(false);
+      alert("Passwords do not match. Please try again.");
+      return;
+    }
+
+    try {
+      // Make API call to Strapi
+      const response = await axios.post(
+        "http://localhost:1337/api/auth/local/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+
+      console.log("Registration successful:", response.data);
       // Redirect to student dashboard on successful registration
       router.push("/student/dashboard");
-    }, 1000);
+    } catch (error: any) {
+      console.error(
+        "Registration failed:",
+        error.response?.data || error.message
+      );
+      alert(
+        error.response?.data?.error?.message ||
+          "An error occurred. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <div className="space-y-4">
       <form onSubmit={onSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="first-name">First name</Label>
-            <Input
-              id="first-name"
-              required
-              placeholder="First Name"
-              defaultValue={user.firstName}
-              onChange={(event) =>
-                setUser((prev) => {
-                  return { ...prev, firstName: event.target.value };
-                })
-              }
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="last-name">Last name</Label>
-            <Input
-              id="last-name"
-              required
-              placeholder="Last Name"
-              defaultValue={user.lastName}
-              onChange={(event) =>
-                setUser((prev) => {
-                  return { ...prev, lastName: event.target.value };
-                })
-              }
-            />
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor="user-name">User name</Label>
+          <Input
+            id="user-name"
+            required
+            placeholder="User Name"
+            value={user.username}
+            onChange={(event) =>
+              setUser((prev) => {
+                return { ...prev, username: event.target.value };
+              })
+            }
+          />
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -72,7 +85,7 @@ export function StudentRegisterForm() {
             type="email"
             placeholder="student@example.com"
             required
-            defaultValue={user.email}
+            value={user.email}
             onChange={(event) =>
               setUser((prev) => {
                 return { ...prev, email: event.target.value };
@@ -87,7 +100,7 @@ export function StudentRegisterForm() {
             type="password"
             required
             placeholder="Password"
-            defaultValue={user.password}
+            value={user.password}
             onChange={(event) =>
               setUser((prev) => {
                 return { ...prev, password: event.target.value };
@@ -101,8 +114,8 @@ export function StudentRegisterForm() {
             id="confirm-password"
             type="password"
             required
-            placeholder="confirm Password"
-            defaultValue={user.confirmPassword}
+            placeholder="Confirm Password"
+            value={user.confirmPassword}
             onChange={(event) =>
               setUser((prev) => {
                 return { ...prev, confirmPassword: event.target.value };

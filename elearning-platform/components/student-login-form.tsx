@@ -1,36 +1,64 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
+//@ts-ignore
+import Cookies from "js-cookie";
+import axios from "axios";
 
 export function StudentLoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault();
     setIsLoading(true);
-    console.log("Student Login sucessfully");
-    // Simulate API call to Strapi
-    setTimeout(() => {
-      setIsLoading(false);
+    setError(null);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:1337/api/auth/local",
+        {
+          identifier: user.email, // Strapi uses `identifier` for email/username
+          password: user.password,
+        }
+      );
+
+      const { jwt, user: loggedInUser } = response.data;
+
+      // Store JWT in cookies
+      Cookies.set("authToken", jwt, {
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        expires: 7, // 7 days expiration
+      });
+
+      console.log("User logged in successfully:", loggedInUser);
+
       // Redirect to student dashboard on successful login
       router.push("/student/dashboard");
-    }, 1000);
+    } catch (error: any) {
+      console.error("Login error:", error.response?.data || error.message);
+      setError(error.response?.data?.error?.message || "Something went wrong!");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <div className="space-y-4">
       <form onSubmit={onSubmit} className="space-y-4">
+        {error && <div className="text-sm text-red-600">{error}</div>}
         <div className="space-y-2">
           <Label htmlFor="student-email">Email</Label>
           <Input
@@ -38,11 +66,12 @@ export function StudentLoginForm() {
             type="email"
             placeholder="student@example.com"
             required
-            defaultValue={user.email}
+            value={user.email}
             onChange={(event) =>
-              setUser((prev) => {
-                return { ...prev, email: event.target.value };
-              })
+              setUser((prev) => ({
+                ...prev,
+                email: event.target.value,
+              }))
             }
           />
         </div>
@@ -57,11 +86,12 @@ export function StudentLoginForm() {
             id="student-password"
             type="password"
             required
-            defaultValue={user.password}
+            value={user.password}
             onChange={(event) =>
-              setUser((prev) => {
-                return { ...prev, password: event.target.value };
-              })
+              setUser((prev) => ({
+                ...prev,
+                password: event.target.value,
+              }))
             }
           />
         </div>
