@@ -38,7 +38,7 @@ export default function StudentCalendarPage() {
                 selected={today}
                 className="rounded-md border"
                 components={{
-                  DayContent: (props) => {
+                  DayContent: (props: any) => {
                     const date = props.date.getDate();
                     const hasEvent = calendarEvents.some((event) => {
                       const eventDate = new Date(event.date);
@@ -48,7 +48,6 @@ export default function StudentCalendarPage() {
                         eventDate.getFullYear() === props.date.getFullYear()
                       );
                     });
-
                     return (
                       <div className="relative h-9 w-9 p-0 flex items-center justify-center">
                         {props.children}
