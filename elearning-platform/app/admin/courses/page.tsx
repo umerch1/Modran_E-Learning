@@ -1,10 +1,17 @@
-import { AdminDashboardLayout } from "@/components/admin-dashboard-layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { AdminDashboardLayout } from "@/components/admin-dashboard-layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,8 +19,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Search, MoreHorizontal, Plus, Filter } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { Search, MoreHorizontal, Plus, Filter } from "lucide-react";
 
 export default function AdminCoursesPage() {
   return (
@@ -37,7 +44,10 @@ export default function AdminCoursesPage() {
           <div className="flex items-center gap-2">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search courses..." className="pl-8 w-[250px]" />
+              <Input
+                placeholder="Search courses..."
+                className="pl-8 w-[250px]"
+              />
             </div>
             <Button variant="outline" size="sm" className="gap-1">
               <Filter className="h-4 w-4" />
@@ -73,7 +83,9 @@ export default function AdminCoursesPage() {
                           />
                           <div>
                             <div className="font-medium">{course.title}</div>
-                            <div className="text-sm text-muted-foreground">{course.category}</div>
+                            <div className="text-sm text-muted-foreground">
+                              {course.category}
+                            </div>
                           </div>
                         </div>
                       </TableCell>
@@ -99,8 +111,8 @@ export default function AdminCoursesPage() {
                             course.status === "Published"
                               ? "success"
                               : course.status === "Draft"
-                                ? "secondary"
-                                : "destructive"
+                              ? "secondary"
+                              : "destructive"
                           }
                         >
                           {course.status}
@@ -109,7 +121,11 @@ export default function AdminCoursesPage() {
                       <TableCell className="text-right">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                            >
                               <span className="sr-only">Open menu</span>
                               <MoreHorizontal className="h-4 w-4" />
                             </Button>
@@ -120,7 +136,9 @@ export default function AdminCoursesPage() {
                             <DropdownMenuItem>View Analytics</DropdownMenuItem>
                             <DropdownMenuItem>Manage Content</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-red-600">Delete Course</DropdownMenuItem>
+                            <DropdownMenuItem className="text-red-600">
+                              Delete Course
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
@@ -151,7 +169,9 @@ export default function AdminCoursesPage() {
               <CardTitle>Published Courses</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Showing all published courses that are available to students.</p>
+              <p className="text-muted-foreground">
+                Showing all published courses that are available to students.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -162,7 +182,9 @@ export default function AdminCoursesPage() {
               <CardTitle>Draft Courses</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Showing all draft courses that are still in development.</p>
+              <p className="text-muted-foreground">
+                Showing all draft courses that are still in development.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -174,14 +196,15 @@ export default function AdminCoursesPage() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Showing all archived courses that are no longer available to students.
+                Showing all archived courses that are no longer available to
+                students.
               </p>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
     </AdminDashboardLayout>
-  )
+  );
 }
 
 const courses = [
@@ -285,5 +308,4 @@ const courses = [
     rating: 4.7,
     status: "Archived",
   },
-]
-
+];

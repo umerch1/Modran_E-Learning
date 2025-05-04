@@ -39,6 +39,12 @@
     },
     "lessons": {
       "type": "string"
+    },
+    "courseStatus": {
+      "type": "string"
+    },
+    "progress": {
+      "type": "string"
     }
   }
 }

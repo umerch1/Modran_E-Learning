@@ -1,10 +1,49 @@
-import { StudentDashboardLayout } from "@/components/student-dashboard-layout"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { Clock } from "lucide-react"
+"use client";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { StudentDashboardLayout } from "@/components/student-dashboard-layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Clock } from "lucide-react";
 
 export default function StudentDashboardPage() {
+  const [inProgressCourses, setInProgressCourses] = useState([]);
+  const [completedCourses, setCompletedCourses] = useState([]);
+  const [bookmarkedCourses, setBookmarkedCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:1337/api/courses?populate=image`
+        );
+        const courses = response.data.data.map((course: any) => ({
+          id: course.id,
+          title: course?.title,
+          description: course.description,
+          image: course?.image?.url || "/placeholder.svg",
+          duration: course.duration,
+          progress: course.progress,
+          status: course.courseStatus,
+        }));
+        setInProgressCourses(
+          courses.filter((c: any) => c.status === "in-progress")
+        );
+        setCompletedCourses(
+          courses.filter((c: any) => c.status === "completed")
+        );
+        setBookmarkedCourses(
+          courses.filter((c: any) => c.status === "bookmarked")
+        );
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   return (
     <StudentDashboardLayout>
       <div className="flex items-center justify-between mb-6">
@@ -15,31 +54,43 @@ export default function StudentDashboardPage() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Enrolled Courses</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Enrolled Courses
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4</div>
+            <div className="text-2xl font-bold">
+              {inProgressCourses.length +
+                completedCourses.length +
+                bookmarkedCourses.length}
+            </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Completed Courses</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Completed Courses
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
+            <div className="text-2xl font-bold">{completedCourses.length}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Certificates Earned</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Certificates Earned
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
+            <div className="text-2xl font-bold">{completedCourses.length}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Hours Spent Learning</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Hours Spent Learning
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">24</div>
@@ -49,11 +100,11 @@ export default function StudentDashboardPage() {
 
       <h2 className="text-xl font-bold mt-8 mb-4">In Progress</h2>
       <div className="grid gap-6 md:grid-cols-2">
-        {inProgressCourses.map((course, index) => (
-          <Card key={index}>
+        {inProgressCourses.map((course: any) => (
+          <Card key={course.id}>
             <CardHeader>
               <CardTitle>{course.title}</CardTitle>
-              <CardDescription>{course.description}</CardDescription>
+              <CardContent>{course.description}</CardContent>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between mb-2">
@@ -73,21 +124,5 @@ export default function StudentDashboardPage() {
         ))}
       </div>
     </StudentDashboardLayout>
-  )
+  );
 }
-
-const inProgressCourses = [
-  {
-    title: "Web Development Fundamentals",
-    description: "Learn HTML, CSS, and JavaScript basics",
-    progress: 65,
-    duration: "2h 15m remaining",
-  },
-  {
-    title: "Introduction to React",
-    description: "Build modern web applications with React",
-    progress: 30,
-    duration: "4h 45m remaining",
-  },
-]
-

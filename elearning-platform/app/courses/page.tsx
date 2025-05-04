@@ -1,10 +1,16 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Search, Filter, BookOpen, Clock, Users, Star } from "lucide-react"
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Search, Filter, BookOpen, Clock, Users, Star } from "lucide-react";
 
 export default function CoursesPage() {
   return (
@@ -15,9 +21,12 @@ export default function CoursesPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Explore Our Courses</h1>
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Explore Our Courses
+                </h1>
                 <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Discover a wide range of courses taught by industry experts to help you advance your career.
+                  Discover a wide range of courses taught by industry experts to
+                  help you advance your career.
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">
@@ -50,7 +59,9 @@ export default function CoursesPage() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="all">All Categories</SelectItem>
-                          <SelectItem value="development">Development</SelectItem>
+                          <SelectItem value="development">
+                            Development
+                          </SelectItem>
                           <SelectItem value="design">Design</SelectItem>
                           <SelectItem value="business">Business</SelectItem>
                           <SelectItem value="marketing">Marketing</SelectItem>
@@ -66,7 +77,9 @@ export default function CoursesPage() {
                         <SelectContent>
                           <SelectItem value="all">All Levels</SelectItem>
                           <SelectItem value="beginner">Beginner</SelectItem>
-                          <SelectItem value="intermediate">Intermediate</SelectItem>
+                          <SelectItem value="intermediate">
+                            Intermediate
+                          </SelectItem>
                           <SelectItem value="advanced">Advanced</SelectItem>
                         </SelectContent>
                       </Select>
@@ -120,8 +133,12 @@ export default function CoursesPage() {
                     <SelectContent>
                       <SelectItem value="popular">Most Popular</SelectItem>
                       <SelectItem value="newest">Newest</SelectItem>
-                      <SelectItem value="price-low">Price: Low to High</SelectItem>
-                      <SelectItem value="price-high">Price: High to Low</SelectItem>
+                      <SelectItem value="price-low">
+                        Price: Low to High
+                      </SelectItem>
+                      <SelectItem value="price-high">
+                        Price: High to Low
+                      </SelectItem>
                       <SelectItem value="rating">Highest Rated</SelectItem>
                     </SelectContent>
                   </Select>
@@ -155,23 +172,23 @@ export default function CoursesPage() {
       </main>
       <SiteFooter />
     </div>
-  )
+  );
 }
 
 interface Course {
-  title: string
-  description: string
-  image: string
-  instructor: string
-  price: number
-  originalPrice?: number
-  rating: number
-  students: number
-  duration: string
-  level: string
-  category: string
-  isBestseller?: boolean
-  isNew?: boolean
+  title: string;
+  description: string;
+  image: string;
+  instructor: string;
+  price: number;
+  originalPrice?: number;
+  rating: number;
+  students: number;
+  duration: string;
+  level: string;
+  category: string;
+  isBestseller?: boolean;
+  isNew?: boolean;
 }
 
 function CourseCard({ course }: { course: Course }) {
@@ -184,7 +201,9 @@ function CourseCard({ course }: { course: Course }) {
           className="h-full w-full object-cover transition-all group-hover:scale-105"
         />
       </div>
-      {course.isBestseller && <Badge className="absolute left-2 top-2">Bestseller</Badge>}
+      {course.isBestseller && (
+        <Badge className="absolute left-2 top-2">Bestseller</Badge>
+      )}
       {course.isNew && (
         <Badge variant="secondary" className="absolute left-2 top-2">
           New
@@ -192,7 +211,9 @@ function CourseCard({ course }: { course: Course }) {
       )}
       <div className="flex flex-col space-y-1.5 p-4">
         <h3 className="font-semibold text-lg line-clamp-1">{course.title}</h3>
-        <p className="text-sm text-muted-foreground line-clamp-2">{course.description}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2">
+          {course.description}
+        </p>
         <div className="flex items-center pt-2 text-sm">
           <span className="flex items-center">
             <Star className="mr-1 h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -220,7 +241,9 @@ function CourseCard({ course }: { course: Course }) {
             {course.originalPrice ? (
               <div className="flex items-center">
                 <span className="text-lg font-bold">${course.price}</span>
-                <span className="ml-2 text-sm line-through text-muted-foreground">${course.originalPrice}</span>
+                <span className="ml-2 text-sm line-through text-muted-foreground">
+                  ${course.originalPrice}
+                </span>
               </div>
             ) : (
               <span className="text-lg font-bold">${course.price}</span>
@@ -230,13 +253,14 @@ function CourseCard({ course }: { course: Course }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const courses: Course[] = [
   {
     title: "Web Development Fundamentals",
-    description: "Learn HTML, CSS, and JavaScript basics to build responsive websites from scratch.",
+    description:
+      "Learn HTML, CSS, and JavaScript basics to build responsive websites from scratch.",
     image: "/placeholder.svg?height=180&width=320",
     instructor: "Sarah Johnson",
     price: 49.99,
@@ -250,7 +274,8 @@ const courses: Course[] = [
   },
   {
     title: "Introduction to React",
-    description: "Master React.js and build modern, interactive web applications with this popular JavaScript library.",
+    description:
+      "Master React.js and build modern, interactive web applications with this popular JavaScript library.",
     image: "/placeholder.svg?height=180&width=320",
     instructor: "Michael Chen",
     price: 59.99,
@@ -289,7 +314,8 @@ const courses: Course[] = [
   },
   {
     title: "Mobile App Development with React Native",
-    description: "Build cross-platform mobile applications for iOS and Android using React Native.",
+    description:
+      "Build cross-platform mobile applications for iOS and Android using React Native.",
     image: "/placeholder.svg?height=180&width=320",
     instructor: "Robert Chen",
     price: 74.99,
@@ -302,7 +328,8 @@ const courses: Course[] = [
   },
   {
     title: "Python for Data Science",
-    description: "Learn Python programming and essential libraries for data analysis and visualization.",
+    description:
+      "Learn Python programming and essential libraries for data analysis and visualization.",
     image: "/placeholder.svg?height=180&width=320",
     instructor: "Maria Garcia",
     price: 59.99,
@@ -313,5 +340,4 @@ const courses: Course[] = [
     category: "Data Science",
     isBestseller: true,
   },
-]
-
+];
