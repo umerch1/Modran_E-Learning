@@ -36,7 +36,7 @@ export function StudentLoginForm() {
 
       const { jwt, user: loggedInUser } = response.data;
 
-      // Store JWT in cookies
+      // Store JWT in cookiesp
       Cookies.set("authToken", jwt, {
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",

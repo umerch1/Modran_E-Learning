@@ -505,6 +505,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
 export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   collectionName: 'courses';
   info: {
+    description: '';
     displayName: 'Course';
     pluralName: 'courses';
     singularName: 'course';
@@ -514,10 +515,12 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   };
   attributes: {
     categories: Schema.Attribute.String;
+    courseStatus: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     instructor: Schema.Attribute.String;
     lessons: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -526,10 +529,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'api::course.course'
     > &
       Schema.Attribute.Private;
-    media: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    progress: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     tags: Schema.Attribute.String;
     title: Schema.Attribute.String;
@@ -1050,6 +1050,9 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    ProfileImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

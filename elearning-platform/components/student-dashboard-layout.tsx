@@ -84,12 +84,12 @@ export function StudentDashboardLayout({
                 Calendar
               </Button>
             </Link>
-            <Link href="/student/messages">
+            {/* <Link href="/student/messages">
               <Button variant="ghost" className="w-full justify-start">
                 <MessageSquare className="mr-2 h-5 w-5" />
                 Messages
               </Button>
-            </Link>
+            </Link> */}
             <Link href="/student/profile">
               <Button variant="ghost" className="w-full justify-start">
                 <Settings className="mr-2 h-5 w-5" />

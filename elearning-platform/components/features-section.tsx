@@ -1,4 +1,4 @@
-import { BookOpen, Users, Award, Clock } from "lucide-react"
+import { BookOpen, Users, Award, Clock, Link } from "lucide-react";
 
 export function FeaturesSection() {
   return (
@@ -6,10 +6,20 @@ export function FeaturesSection() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">Features</div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Everything you need to succeed</h2>
+            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
+              Features
+            </div>
+
+            {/* <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
+              Hello world
+            </div> */}
+
+            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+              Everything you need to succeed
+            </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Our platform provides all the tools and resources you need to enhance your learning experience.
+              Our platform provides all the tools and resources you need to
+              enhance your learning experience.
             </p>
           </div>
         </div>
@@ -37,18 +47,21 @@ export function FeaturesSection() {
               <Award className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold">Certificates</h3>
-            <p className="text-center text-muted-foreground">Earn recognized certificates upon course completion.</p>
+            <p className="text-center text-muted-foreground">
+              Earn recognized certificates upon course completion.
+            </p>
           </div>
           <div className="flex flex-col items-center space-y-2 rounded-lg p-4">
             <div className="rounded-full bg-primary p-2 text-primary-foreground">
               <Clock className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold">Flexible Learning</h3>
-            <p className="text-center text-muted-foreground">Study at your own pace, anytime and anywhere.</p>
+            <p className="text-center text-muted-foreground">
+              Study at your own pace, anytime and anywhere.
+            </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

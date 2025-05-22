@@ -4,7 +4,8 @@
   "info": {
     "singularName": "course",
     "pluralName": "courses",
-    "displayName": "Course"
+    "displayName": "Course",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,20 +23,27 @@
     "tags": {
       "type": "string"
     },
-    "media": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "instructor": {
       "type": "string"
     },
     "lessons": {
+      "type": "string"
+    },
+    "courseStatus": {
+      "type": "string"
+    },
+    "progress": {
       "type": "string"
     }
   }
