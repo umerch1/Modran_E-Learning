@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Icons } from "@/components/icons"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icons } from "@/components/icons";
 
 export function AdminProfileForm() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(event: React.FormEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+    event.preventDefault();
+    setIsLoading(true);
 
     // Simulate API call to Strapi
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       // Show success message
-      alert("Profile updated successfully!")
-    }, 1000)
+      alert("Profile updated successfully!");
+    }, 1000);
   }
 
   return (
@@ -29,7 +29,10 @@ export function AdminProfileForm() {
       <div className="flex flex-col gap-6 sm:flex-row">
         <div className="flex flex-col items-center gap-4">
           <Avatar className="h-24 w-24">
-            <AvatarImage src="/placeholder.svg?height=96&width=96" alt="Admin" />
+            <AvatarImage
+              src="/placeholder.svg?height=96&width=96"
+              alt="Admin"
+            />
             <AvatarFallback>AD</AvatarFallback>
           </Avatar>
           <Button variant="outline" size="sm">
@@ -61,7 +64,7 @@ export function AdminProfileForm() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="phone">Phone Number</Label>
-          <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" />
+          <Input id="phone" type="tel" defaultValue="+923094558230" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="department">Department</Label>
@@ -74,6 +77,5 @@ export function AdminProfileForm() {
         Save Changes
       </Button>
     </form>
-  )
+  );
 }
-

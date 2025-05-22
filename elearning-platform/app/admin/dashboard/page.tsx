@@ -1,8 +1,15 @@
-import { AdminDashboardLayout } from "@/components/admin-dashboard-layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Users, BookOpen, DollarSign, TrendingUp } from "lucide-react"
+import { AdminDashboardLayout } from "@/components/admin-dashboard-layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Users, BookOpen, DollarSign, TrendingUp } from "lucide-react";
 
 export default function AdminDashboardPage() {
   return (
@@ -15,26 +22,34 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Students</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Students
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
               <Users className="mr-2 h-4 w-4 text-muted-foreground" />
               <div className="text-2xl font-bold">1,248</div>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">+12% from last month</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              +12% from last month
+            </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Active Courses</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Active Courses
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
               <BookOpen className="mr-2 h-4 w-4 text-muted-foreground" />
               <div className="text-2xl font-bold">36</div>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">+3 new this month</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              +3 new this month
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -46,19 +61,25 @@ export default function AdminDashboardPage() {
               <DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />
               <div className="text-2xl font-bold">$24,320</div>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">+18% from last month</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              +18% from last month
+            </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Course Completion</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Course Completion
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
               <TrendingUp className="mr-2 h-4 w-4 text-muted-foreground" />
               <div className="text-2xl font-bold">68%</div>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">+5% from last month</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              +5% from last month
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -79,7 +100,9 @@ export default function AdminDashboardPage() {
             <TableBody>
               {recentEnrollments.map((enrollment, index) => (
                 <TableRow key={index}>
-                  <TableCell className="font-medium">{enrollment.student}</TableCell>
+                  <TableCell className="font-medium">
+                    {enrollment.student}
+                  </TableCell>
                   <TableCell>{enrollment.course}</TableCell>
                   <TableCell>{enrollment.date}</TableCell>
                   <TableCell>
@@ -105,7 +128,7 @@ export default function AdminDashboardPage() {
         </CardContent>
       </Card>
     </AdminDashboardLayout>
-  )
+  );
 }
 
 const recentEnrollments = [
@@ -128,7 +151,7 @@ const recentEnrollments = [
     status: "Active",
   },
   {
-    student: "Sarah Lee",
+    student: "Umer",
     course: "Data Science Fundamentals",
     date: "Mar 3, 2025",
     status: "Active",
@@ -139,5 +162,4 @@ const recentEnrollments = [
     date: "Mar 2, 2025",
     status: "Pending",
   },
-]
-
+];

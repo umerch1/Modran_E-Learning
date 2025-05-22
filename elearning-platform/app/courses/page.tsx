@@ -2,15 +2,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, BookOpen, Clock, Users, Star } from "lucide-react";
+import { Search, BookOpen, Clock, Users, Star } from "lucide-react";
 
 export default function CoursesPage() {
   return (
@@ -46,102 +39,10 @@ export default function CoursesPage() {
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col md:flex-row gap-6">
-              {/* Filters */}
-              <div className="w-full md:w-64 space-y-6">
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Filters</h3>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Category</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Categories</SelectItem>
-                          <SelectItem value="development">
-                            Development
-                          </SelectItem>
-                          <SelectItem value="design">Design</SelectItem>
-                          <SelectItem value="business">Business</SelectItem>
-                          <SelectItem value="marketing">Marketing</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Level</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Levels</SelectItem>
-                          <SelectItem value="beginner">Beginner</SelectItem>
-                          <SelectItem value="intermediate">
-                            Intermediate
-                          </SelectItem>
-                          <SelectItem value="advanced">Advanced</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Price</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select price range" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Prices</SelectItem>
-                          <SelectItem value="free">Free</SelectItem>
-                          <SelectItem value="paid">Paid</SelectItem>
-                          <SelectItem value="under50">Under $50</SelectItem>
-                          <SelectItem value="50to100">$50 - $100</SelectItem>
-                          <SelectItem value="over100">Over $100</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Duration</label>
-                      <Select defaultValue="all">
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select duration" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Any Duration</SelectItem>
-                          <SelectItem value="short">0-3 Hours</SelectItem>
-                          <SelectItem value="medium">3-10 Hours</SelectItem>
-                          <SelectItem value="long">10+ Hours</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <Button className="w-full">
-                      <Filter className="mr-2 h-4 w-4" />
-                      Apply Filters
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
               {/* Course Grid */}
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold">Available Courses</h2>
-                  <Select defaultValue="popular">
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="popular">Most Popular</SelectItem>
-                      <SelectItem value="newest">Newest</SelectItem>
-                      <SelectItem value="price-low">
-                        Price: Low to High
-                      </SelectItem>
-                      <SelectItem value="price-high">
-                        Price: High to Low
-                      </SelectItem>
-                      <SelectItem value="rating">Highest Rated</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
 
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
