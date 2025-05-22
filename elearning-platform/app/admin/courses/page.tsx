@@ -109,7 +109,7 @@ export default function AdminCoursesPage() {
                         <Badge
                           variant={
                             course.status === "Published"
-                              ? "success"
+                              ? "default"
                               : course.status === "Draft"
                               ? "secondary"
                               : "destructive"
